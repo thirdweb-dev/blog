@@ -24,7 +24,7 @@ const Blog: ConsolePage<GuidesPageProps> = ({ guides: blogs }) => {
       />
       <Stack spacing={20}>
         <FeaturedBlog blog={blogs[0]} />
-        <GuidesList title="All blogs" guides={blogs} blog />
+        <GuidesList title="All blogs" guides={blogs} />
       </Stack>
     </Track>
   );

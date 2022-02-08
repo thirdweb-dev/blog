@@ -88,7 +88,7 @@ export const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ blog }) => {
             </>
           )}
         </Stack>
-        <LinkOverlay as={NextLink} href={`/blog/${blog.slug}`}>
+        <LinkOverlay as={NextLink} href={`/${blog.slug}`}>
           <Heading size="title.lg" fontWeight={600} noOfLines={3} mb={2}>
             {title}
           </Heading>

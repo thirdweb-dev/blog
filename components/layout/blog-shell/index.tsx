@@ -14,7 +14,7 @@ export const BlogShell: React.FC = ({ children }) => {
   useEffect(() => {
     const handleRouteChange = (url: string) => {
       // close mobile sidebar if user navigates to a new page
-      if (url.indexOf("/blog") > -1) {
+      if (url.indexOf("/") > -1) {
         setFlag.off();
       }
     };
@@ -35,10 +35,10 @@ export const BlogShell: React.FC = ({ children }) => {
         openGraph={{
           title: "Blog | thirdweb",
           description: "Visit thirdweb technical blog.",
-          url: `https://thirdweb.com/blog`,
+          url: `https://blog.thirdweb.com/`,
           images: [
             {
-              url: "https://thirdweb.com/blog.png",
+              url: "https://blog.thirdweb.com/blog.png",
               width: 1200,
               height: 630,
               alt: "Blog | thirdweb",
@@ -67,7 +67,7 @@ export const BlogShell: React.FC = ({ children }) => {
           maxW="100vw"
           p={{ base: 4, md: 6 }}
         >
-          <NextLink display="flex" href="/blog">
+          <NextLink display="flex" href="/">
             <Logo />
           </NextLink>
         </Stack>

@@ -17,7 +17,6 @@ import { GrayTag } from "../tag";
 interface PortalGuideCardProps {
   guide: Guide;
   href: string;
-  blog?: boolean | undefined;
 }
 export const TagToModuleTypeMap = {
   "nft-collection": ModuleType.NFT,
@@ -35,7 +34,6 @@ export const TagToModuleTypeMap = {
 export const PortalGuideCard: React.FC<PortalGuideCardProps> = ({
   guide,
   href,
-  blog,
 }) => {
   const { image, title, tags } = guide;
   const specialTag: keyof typeof TagToModuleTypeMap | undefined =
@@ -101,7 +99,7 @@ export const PortalGuideCard: React.FC<PortalGuideCardProps> = ({
       </Stack>
       <Stack direction="row">
         {tags?.slice(0, 3).map((tag) => (
-          <GrayTag key={tag} tag={tag} blog={blog} />
+          <GrayTag key={tag} tag={tag} />
         ))}
       </Stack>
     </LinkBox>

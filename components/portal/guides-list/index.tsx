@@ -10,7 +10,6 @@ interface GuidesListProps {
   guides: GuideData[];
   showMore?: boolean;
   tags?: boolean;
-  blog?: boolean;
 }
 
 export const GuidesList: React.FC<GuidesListProps> = ({
@@ -18,7 +17,6 @@ export const GuidesList: React.FC<GuidesListProps> = ({
   guides,
   showMore,
   tags,
-  blog,
 }) => {
   return (
     <PortalSection title={title} href={showMore ? "/guides" : ""}>
@@ -46,8 +44,7 @@ export const GuidesList: React.FC<GuidesListProps> = ({
             <PortalGuideCard
               key={`guide_${idx}`}
               guide={guide.metadata}
-              href={`${blog ? "/blog/" : "/guides/"}${guide.slug}`}
-              blog={blog}
+              href={`/${guide.slug}`}
             />
           ))}
         </SimpleGrid>

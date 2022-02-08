@@ -4,12 +4,11 @@ import * as React from "react";
 
 interface GrayTagProps {
   tag: string;
-  blog?: boolean | undefined;
 }
 
-export const GrayTag: React.FC<GrayTagProps> = ({ tag, blog }) => {
+export const GrayTag: React.FC<GrayTagProps> = ({ tag }) => {
   return (
-    <NextLink key={tag} href={`/${blog ? "blog" : "guides"}/tag/${tag}`}>
+    <NextLink key={tag} href={`/tag/${tag}`}>
       <Badge
         p={1.5}
         variant="subtle"

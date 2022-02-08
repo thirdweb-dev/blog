@@ -1,5 +1,5 @@
 import { Container, Heading, Stack, Text } from "@chakra-ui/react";
-import { PortalLayout } from "components/app-layouts/portal";
+import { BlogLayout } from "components/app-layouts/blog";
 import { LinkButton } from "components/shared/LinkButton";
 import { ConsolePage } from "pages/_app";
 import React from "react";
@@ -15,7 +15,7 @@ const Portal404Page: ConsolePage = () => {
         </Text>
         <Text size="body.lg">
           You can try to find what you are looking for by going back to the{" "}
-          <strong>Portal</strong> home page.
+          <strong>Blog</strong> home page.
         </Text>
         <LinkButton
           alignSelf="flex-start"
@@ -32,4 +32,4 @@ const Portal404Page: ConsolePage = () => {
 
 export default Portal404Page;
 
-Portal404Page.Layout = PortalLayout;
+Portal404Page.Layout = BlogLayout;
