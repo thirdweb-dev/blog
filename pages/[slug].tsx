@@ -6,7 +6,7 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/layout";
-import { PortalLayout } from "components/app-layouts/portal";
+import { BlogLayout } from "components/app-layouts/blog";
 import { ChakraNextImage } from "components/Image";
 import { PORTAL_SIDEBAR_WIDTH } from "components/layout/portal-shell/Sidebar";
 import { GuideCta } from "components/portal/guide-cta";
@@ -25,23 +25,23 @@ import { useRouter } from "next/router";
 import { ConsolePage } from "pages/_app";
 import path from "path";
 import {
+  blogsFilePaths,
+  BLOGS_PATH,
   getHeadings,
   getMdxSource,
-  guidesFilePaths,
-  GUIDES_PATH,
 } from "utils/mdxUtils";
 import { Guide, TocHeading } from "utils/portalTypes";
 import { pxToRem } from "utils/pxFunctions";
 
 dayjs.extend(localizedFormat);
 
-interface GuidePageProps {
+interface BlogPageProps {
   source: MDXRemoteSerializeResult;
   frontMatter: Guide;
   headings: TocHeading[];
 }
 
-const GuidePage: ConsolePage<GuidePageProps> = ({
+const BlogPage: ConsolePage<BlogPageProps> = ({
   source,
   frontMatter,
   headings,
@@ -49,7 +49,7 @@ const GuidePage: ConsolePage<GuidePageProps> = ({
   const router = useRouter();
   const slug = useSingleQueryParam("slug");
   const { Track } = useTrack({
-    page: "guide",
+    page: "blog",
     title: frontMatter.title,
     slug,
   });
@@ -153,12 +153,12 @@ const GuidePage: ConsolePage<GuidePageProps> = ({
   );
 };
 
-export default GuidePage;
+export default BlogPage;
 
-GuidePage.Layout = PortalLayout;
+BlogPage.Layout = BlogLayout;
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const postFilePath = path.join(GUIDES_PATH, `${params?.slug}.mdx`);
+  const postFilePath = path.join(BLOGS_PATH, `${params?.slug}.mdx`);
   const source = fs.readFileSync(postFilePath);
 
   const { content, data } = matter(source);
@@ -174,7 +174,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths = async () => {
-  const paths = guidesFilePaths
+  const paths = blogsFilePaths
     // Remove file extensions for page paths
     .map((pth) => pth.replace(/\.mdx?$/, ""))
     // Map the path into the static paths object required by Next.js

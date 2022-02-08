@@ -7,7 +7,7 @@ import { useSingleQueryParam } from "hooks/useQueryParam";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { NextSeo } from "next-seo";
 import { ConsolePage } from "pages/_app";
-import { getAllGuides } from "utils/mdxUtils";
+import { getAllBlogs } from "utils/mdxUtils";
 import { GuideData } from "utils/portalTypes";
 
 interface TagPageProps {
@@ -48,7 +48,7 @@ export default TagPage;
 TagPage.Layout = PortalLayout;
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const guides = getAllGuides().filter((guide) =>
+  const guides = getAllBlogs().filter((guide) =>
     guide.metadata.tags.some((tag: string) => tag === params?.tag),
   );
 
@@ -60,7 +60,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = getAllGuides()
+  const paths = getAllBlogs()
     .map((guide) =>
       guide.metadata.tags.map((tag: string) => ({ params: { tag } })),
     )

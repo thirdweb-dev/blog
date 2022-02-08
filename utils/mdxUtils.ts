@@ -8,19 +8,11 @@ import remarkCodeTitles from "remark-code-titles";
 import remarkSlug from "remark-slug";
 import slugify from "slugify";
 
-// GUIDES_PATH is useful when you want to get the path to a specific file
-export const GUIDES_PATH = path.join(process.cwd(), "portal/guides");
-// guidesFilePaths is the list of all mdx files inside the GUIDES_PATH directory
-export const guidesFilePaths = fs
-  .readdirSync(GUIDES_PATH)
+export const BLOGS_PATH = path.join(process.cwd(), "blog");
+export const blogsFilePaths = fs
+  .readdirSync(BLOGS_PATH)
   // Only include md(x) files
   .filter((pth) => /\.mdx?$/.test(pth));
-
-export const LEARN_PATH = path.join(process.cwd(), "portal/learn");
-export const learnFilePaths = fs
-  .readdirSync(LEARN_PATH)
-  .filter((pth) => /\.mdx?$/.test(pth));
-
 export const getHeadings = (src: string) => {
   const headingLines = src.split("\n").filter((line) => line.match(/^###*\s/));
 
@@ -42,10 +34,10 @@ export const getMdxSource = async (content: string, data: any) =>
     scope: data,
   });
 
-export const getAllGuides = () => {
-  return guidesFilePaths
+export const getAllBlogs = () => {
+  return blogsFilePaths
     .map((filePath: string) => {
-      const source = fs.readFileSync(path.join(GUIDES_PATH, filePath));
+      const source = fs.readFileSync(path.join(BLOGS_PATH, filePath));
       const { data } = matter(source);
 
       return {
