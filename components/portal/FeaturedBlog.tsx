@@ -95,7 +95,7 @@ export const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ blog }) => {
         </LinkOverlay>
         <Stack direction="row">
           {tags?.slice(0, 3).map((tag) => (
-            <GrayTag key={tag} tag={tag} blog />
+            <GrayTag key={tag} tag={tag} />
           ))}
         </Stack>
       </Stack>
