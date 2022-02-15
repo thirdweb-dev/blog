@@ -1,0 +1,129 @@
+---
+title: "Feature release: Delayed reveal NFTs"
+author: "Krishang"
+authorAvatar: ""
+authorTwitter: "https://twitter.com/MonkeyMeaning"
+draft: false
+tags: [react, marketplace, auction, front-end]
+summary: "Create rug-pull proof delayed-reveal NFTs"
+image: "/assets/blog/delayed-reveal-nfts/thumbnail.jpeg"
+date: "2022-02-08"
+updated: ""
+---
+
+We’re announcing the relase of ‘delayed-reveal’ NFTs — one of the most requested features by thirdweb users.
+
+Using ‘delayed-reveal’ NFTs, you can distribute NFTs to your audience and retroactively reveal the contents of the distributed NFTs. Thirdweb’s implementation of ‘delayed-reveal’ NFTs delivers 2 main guarantees:
+
+- No external party can inspect the content of NFTs in their ‘unrevealed’ state.
+- The creator commits to what content will be revealed in the future as the content of NFTs, at the time of minting. So — NFT holders can’t be rug pulled.
+
+This article explains how thirdweb’s ‘delayed-reveal’ NFTs delivers these guarantees, and avoids pitfalls or exploits faced by ‘delayed-reveal’ NFTs in the wider NFT ecosystem.
+
+## No rug-pulls, no sniping: avoiding pitfalls and exploits.
+
+In the wider NFT ecosystem, ‘delayed-reveal’ NFT projects have battled exploits — technical and social — for 2 fundamental reasons.
+
+- External parties are able to inspect the secret content of ‘delayed-reveal’ NFTs *before* the reveal.
+- The NFT project rug pulls participants by not committing to what will later be revealed as the content of the NFTs, at mint time.
+
+Thirdweb’s implementation of ‘delayed-reveal’ NFTs solves both these issues.
+
+### The Sniping
+
+Most NFT smart contracts directly store the URI at which the content of the NFTs lives. If an NFT project’s intent is to perform a ‘delayed reveal’ i.e. truly hide the contents of the NFTs from minters, this can be disastrous.
+
+External parties are able to inspect the secret content of ‘delayed-reveal’ NFTs *before* the reveal. As a result, opportunistic bots / participants can figure out things like ‘which of NFTs have the rarest traits’, and mint those targeted NFTs, accordingly.
+
+Here’s a thread where [Anish Agnihotri](https://twitter.com/_anishagnihotri) explains how popuar projects like [Meebits](https://meebits.larvalabs.com/) or (in the thread) [Adventure Cards](https://0xadventures.com/) were vulnerable to this exploit.
+
+[https://twitter.com/_anishagnihotri/status/1440359305341923332](https://twitter.com/_anishagnihotri/status/1440359305341923332)
+
+Thirdweb’s implementation of ‘delayed-reveal’ NFTs solves this issue, since the URI at which the secret contents of the NFTs lives, is published only at the point of reveal. Up till then, the NFT creator(s) alone knows of the secret contents of the NFTs.
+
+### The Rug-pull
+
+When ‘delayed-reveal’ NFTs give no comittment to participants at mint time about what will be revealed as the contents of NFTs in the future, participants are at the complete mercy of the NFT creators.
+
+The NFT creators may be scrambling to create whatever NFTs *after* participants have minted ‘delayed-reveal’ NFTs — or not. Regardless, the participants have no hard committment from creators about the ‘unrevealed’ NFTs they’ve just minted.
+
+Thirdweb’s implementation of ‘delayed-reveal’ NFTs takes an opinionated stance on this issue — creators must decide and commit to the secret content of NFTs that will be revealed in the future, at the time of minting.
+
+This gives a hard, *programmatic* committment to participants that the secret contents of the NFTs has already been determined — just not revealed.
+
+## Creating ‘delayed-reveal’ NFTs
+
+### Pre-requisite
+
+Let’s say a creator has already prepared the contents of the NFTs that will be revealed in the future, and has uploaded the contents to IPFS via thirdweb. The creator then has an IPFS URI like `ipfs://secret-until-reveal/` at hand, where the contents of the NFT with e.g. token ID `1` lives at `ipfs://secret-until-reveal/1`.
+
+The creator now takes three steps to publish delayed-reveal NFTs.
+
+![3 steps to create delayed reveal NFTs.](/assets/blog/delayed-reveal-nfts/tw-blog-pic-1.png)
+
+### Step 1: Encryption
+
+The creator will generate a password, just like generating a password for an email account. This password is used as an encryption/decryption key to encrypt the URI that is to be revealed in the future.
+
+Using their password, the creator will encrypt their ‘secret’ URI `ipfs://secret-until-reveal/` using their NFT contract, and receive its encrypted analog (which looks like garble `0x6b9...`).
+
+![Creator uses the NFT contract to encrypt the secret URI (which is never published on-chain in this process).](/assets/blog/delayed-reveal-nfts/tw-blog-pic-2.png)
+
+Thirdweb’s implementation of ‘delayed-reveal’ NFTs uses the [XOR cipher](https://en.wikipedia.org/wiki/XOR_cipher) as its encryption scheme. This is a single key, symmetric encryption/decryption scheme i.e. you need to know just one “password” (the encryption/decryption key) to go from unencrypted-value → encrypted value, and back.
+
+### Step 2: Mint
+
+At the time of minting the ‘delayed-reveal’ NFTs, the creator provides their NFT contract with *2* URIs — the encrypted URI generated in the previous step, and a ‘placeholder’ URI.
+
+![Creators choose how their NFTs look like, before the reveal.](/assets/blog/delayed-reveal-nfts/te-blog-pic-3.png)
+
+1. **Encrypted URI**
+    
+    This is the encrypted URI generated in the previous step. 
+    
+    By associating the minted ‘delayed-reveal’ NFTs with this encrypted URIs ensures that the creator has committed to what will be revealed as the contents of the NFTs in the future.
+    
+    This makes the entire process of ‘delayed-reveal’ NFTs **rug-pull proof**. Although no one knows the contents of the NFTs until the reveal, there is a guarantee that the contents of the NFTs has already been decided, pre-reveal.
+    
+2. **Placeholder URI**
+    
+    The placeholder URI determines what the ‘delayed-reveal’ NFTs look like, before the reveal. 
+    
+    The creator has total control over how this ‘placeholder’ state of NFTs looks like, for instance, on a marketplace like OpenSea, just like the creator has total control over the contents of the NFTs that will be revealed in the future.
+    
+
+### Step 3: Reveal
+
+Finally — the reveal. To reveal the contents of the ‘delayed-reveal’ NFTs, the creator publishes the password (used in S*tep 1*) on their NFT smart contract.
+
+In one fell swoop, this changes how the ‘delayed-reveal’ NFTs look on every platform rendering the NFTs e.g. marketplaces like OpenSea, etc.
+
+## Security considerations
+
+[Creating ‘delayed-reveal’ NFTs](https://blog.thirdweb.com//delayed-reveal-nfts#step-1-encryption) involves generating a one-time password to encrypt the secret contents of the NFTs that will be revealed in the future.
+
+The security of the 'delayed-reveal' depends on the complexity of the password set by the creator, in the way your email security depends on the complexity of your email password.
+
+The stronger the password set by the creator, the harder it is for an external party to discover the secret contents of the NFTs, from the encrypted information published on the NFT smart contract.
+
+### Added password security by thirdweb SDK and dashboard
+
+Using the thirdweb SDK or dashboard to create ‘delayed-reveal’ NFTs ensures your password is *never* published on the blockchain in its raw form.
+
+Under the hood, your password is hashed to let you use the same password on different chains and for multiple smart contracts, without ever revealing the original password. This lets users 1-to-1 duplicate their flow on a testnet, onto a main network.
+
+**The password the creator keeps track of:**
+
+- Any password e.g. “never-just-use-123”
+
+**How thirdweb SDK secures the password:**
+
+```javascript
+keccak256(“never-just-use-123”, chainId, contractAddress, ID-for-delayed-reveal-NFTs)
+```
+
+## How can I create delayed reveal NFTs with thirdweb?
+
+Thirdweb’s [NFT Drop](https://thirdweb.com/portal/guides/nft-drop) module fully supports ‘delayed-reveal’ NFTs. Check out [this guide](https://portal.thirdweb.com/guides/nft-drop-with-delayed-reveal) for a step-by-step walkthrough of creating delayed-reveal NFTs on the thirdweb dashboard. We’ll soon roll out support for ‘delayed-reveal’ NFTs for *all* thirdweb modules that are NFTs.
+
+Head over to the [thirdweb dashboard](http://thirdweb.com/dashboard) to create your ‘delayed-reveal’ NFTs, right away. Thirdweb’s smart contract implementation for ‘delayed-reveal’ NFTs is available at our open source [smart contracts repository](https://github.com/nftlabs/nftlabs-protocols/blob/main/contracts/lazy_mint/ERC721/LazyMintERC721.sol).
