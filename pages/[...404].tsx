@@ -1,5 +1,4 @@
 import { Container, Heading, Stack, Text } from "@chakra-ui/react";
-import { BlogLayout } from "components/app-layouts/blog";
 import { LinkButton } from "components/shared/LinkButton";
 import { ConsolePage } from "pages/_app";
 import React from "react";
@@ -31,5 +30,3 @@ const Portal404Page: ConsolePage = () => {
 };
 
 export default Portal404Page;
-
-Portal404Page.Layout = BlogLayout;

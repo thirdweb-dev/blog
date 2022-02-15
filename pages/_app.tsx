@@ -1,9 +1,8 @@
 import { ChakraProvider, useColorMode } from "@chakra-ui/react";
 import { css, Global } from "@emotion/react";
-import { AppLayout } from "components/app-layouts/app";
-import { FallbackLayout } from "components/app-layouts/fallback";
-import { PortalLayout } from "components/app-layouts/portal";
-import { Providers } from "components/app-layouts/web3-providers";
+import { MDXProvider } from "@mdx-js/react";
+import { BlogShell } from "components/layout/blog-shell";
+import { MdxComponents } from "components/portal";
 import { useTrack } from "hooks/analytics/useTrack";
 import { NextComponentType, NextPageContext } from "next";
 import { DefaultSeo } from "next-seo";
@@ -20,7 +19,7 @@ export type ConsolePageComponent<IP, P> = NextComponentType<
   IP,
   P
 > & {
-  Layout?: typeof AppLayout | typeof PortalLayout;
+  Layout?: undefined;
 };
 
 export type ConsolePage<P = {}, IP = P> = ConsolePageComponent<IP, P>;
@@ -97,7 +96,6 @@ function ConsoleApp({ Component, pageProps }: ConsoleAppProps) {
     },
   );
 
-  const Layout = Component.Layout || FallbackLayout;
   return (
     <Track>
       <Global
@@ -143,11 +141,11 @@ function ConsoleApp({ Component, pageProps }: ConsoleAppProps) {
 
       <ChakraProvider theme={chakraTheme}>
         <GlobalStyle />
-        <Providers>
-          <Layout>
+        <MDXProvider components={MdxComponents}>
+          <BlogShell>
             <Component {...pageProps} />
-          </Layout>
-        </Providers>
+          </BlogShell>
+        </MDXProvider>
       </ChakraProvider>
     </Track>
   );
