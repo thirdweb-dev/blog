@@ -64,7 +64,7 @@ const BlogPage: ConsolePage<BlogPageProps> = ({
         openGraph={{
           title: frontMatter.title,
           description: frontMatter.summary,
-          url: `https://thirdweb.com${router.asPath}`,
+          url: `https://blog.thirdweb.com${router.asPath}`,
           type: "article",
           article: {
             publishedTime: new Date(frontMatter.date).toISOString(),

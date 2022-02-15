@@ -18,7 +18,7 @@
     "@chakra-ui/react": "^1.7.5",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "@mdx-js/react": "^2.0.0",
+    "@mdx-js/react": "^1.0.0",
     "color": "^4.0.1",
     "dayjs": "^1.10.7",
     "emotion-theming": "^11.0.0",
