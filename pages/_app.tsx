@@ -120,7 +120,7 @@ function ConsoleApp({ Component, pageProps }: ConsoleAppProps) {
           title: "thirdweb",
           type: "website",
           locale: "en_US",
-          url: "https://thirdweb.com",
+          url: "https://blog.thirdweb.com",
           site_name: "thirdweb",
           images: [
             {
@@ -136,7 +136,7 @@ function ConsoleApp({ Component, pageProps }: ConsoleAppProps) {
           site: "@thirdweb_",
           cardType: "summary_large_image",
         }}
-        canonical={`https://thirdweb.com${router.asPath}`}
+        canonical={`https://blog.thirdweb.com${router.asPath}`}
       />
 
       <ChakraProvider theme={chakraTheme}>

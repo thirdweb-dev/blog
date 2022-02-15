@@ -52,7 +52,7 @@ const BlogPage: ConsolePage<BlogPageProps> = ({
     slug,
   });
 
-  const ogImage = `https://thirdweb.com/_next/image?url=${frontMatter.image.replace(
+  const ogImage = `https://blog.thirdweb.com/_next/image?url=${frontMatter.image.replace(
     /\//g,
     "%2F",
   )}&w=1200&q=90`;
