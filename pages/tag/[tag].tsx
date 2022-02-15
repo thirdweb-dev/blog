@@ -1,5 +1,4 @@
 import { Stack } from "@chakra-ui/layout";
-import { BlogLayout } from "components/app-layouts/blog";
 import { GuidesList } from "components/portal/guides-list";
 import { PortalHeaderCard } from "components/portal/header-card";
 import { useTrack } from "hooks/analytics/useTrack";
@@ -44,8 +43,6 @@ const TagPage: ConsolePage<TagPageProps> = ({ guides }) => {
 };
 
 export default TagPage;
-
-TagPage.Layout = BlogLayout;
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const guides = getAllBlogs().filter((guide) =>

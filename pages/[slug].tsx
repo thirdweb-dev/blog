@@ -6,9 +6,7 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/layout";
-import { BlogLayout } from "components/app-layouts/blog";
 import { ChakraNextImage } from "components/Image";
-import { PORTAL_SIDEBAR_WIDTH } from "components/layout/portal-shell/Sidebar";
 import { GuideCta } from "components/portal/guide-cta";
 import { GuideToc, GUIDE_TOC_WIDTH } from "components/portal/guide-toc";
 import { GrayTag } from "components/portal/tag";
@@ -95,7 +93,7 @@ const BlogPage: ConsolePage<BlogPageProps> = ({
             base: "100%",
             lg: `min(${pxToRem(
               800,
-            )}, calc(100vw - ${PORTAL_SIDEBAR_WIDTH} - ${GUIDE_TOC_WIDTH} - var(--chakra-space-20)))`,
+            )}, calc(100vw - ${0} - ${GUIDE_TOC_WIDTH} - var(--chakra-space-20)))`,
           }}
         >
           <Box borderRadius="lg" overflow="hidden" mb={12}>
@@ -154,8 +152,6 @@ const BlogPage: ConsolePage<BlogPageProps> = ({
 };
 
 export default BlogPage;
-
-BlogPage.Layout = BlogLayout;
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const postFilePath = path.join(BLOGS_PATH, `${params?.slug}.mdx`);
