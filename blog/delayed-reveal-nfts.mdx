@@ -35,9 +35,9 @@ Most NFT smart contracts directly store the URI at which the content of the NFTs
 
 External parties are able to inspect the secret content of ‘delayed-reveal’ NFTs *before* the reveal. As a result, opportunistic bots / participants can figure out things like ‘which of NFTs have the rarest traits’, and mint those targeted NFTs, accordingly.
 
-Here’s a thread where [Anish Agnihotri](https://twitter.com/_anishagnihotri) explains how popuar projects like [Meebits](https://meebits.larvalabs.com/) or (in the thread) [Adventure Cards](https://0xadventures.com/) were vulnerable to this exploit.
+Here’s a [thread](https://twitter.com/_anishagnihotri/status/1440359305341923332) where Anish Agnihotri explains how popular projects like [Meebits](https://meebits.larvalabs.com/) or (in the thread) [Adventure Cards](https://0xadventures.com/) were vulnerable to this exploit.
 
-[https://twitter.com/_anishagnihotri/status/1440359305341923332](https://twitter.com/_anishagnihotri/status/1440359305341923332)
+![Anish Agnihotri explains how popular projects were vulnerable to rarity sniping.](/assets/blog/delayed-reveal-nfts/tw-blog-pic-4.png)
 
 Thirdweb’s implementation of ‘delayed-reveal’ NFTs solves this issue, since the URI at which the secret contents of the NFTs lives, is published only at the point of reveal. Up till then, the NFT creator(s) alone knows of the secret contents of the NFTs.
 

@@ -20,6 +20,7 @@ import React from "react";
 import { onlyText } from "react-children-utilities";
 import { FiLink } from "react-icons/fi";
 import { IoCopy } from "react-icons/io5";
+import TweetEmbed from "react-tweet-embed";
 import slugify from "slugify";
 import { MdxNavigation, MdxNavigationItem } from "./mdx-nav";
 
@@ -133,6 +134,20 @@ export const CodeWithCopy: React.FC = ({ children }) => {
   );
 };
 
+/**
+ * Supports plain text, images, quote tweets.
+ *
+ * Needs support for images, GIFs, and replies maybe?
+ * Styles use !important to override Tailwind .prose inside MDX.
+ */
+function Tweet({ tweetId }: any) {
+  return (
+    <>
+      <TweetEmbed id={tweetId} />
+    </>
+  );
+}
+
 export const MdxComponents = {
   a: MdxA,
   h1: MdxH1,
@@ -173,5 +188,6 @@ export const MdxComponents = {
   ImageSideToSide,
   MdxNavigation,
   MdxNavigationItem,
+  Tweet,
   // Youtube,
 };
