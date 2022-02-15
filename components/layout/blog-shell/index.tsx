@@ -7,7 +7,7 @@ import React, { useEffect } from "react";
 import { pxToRem } from "utils/pxFunctions";
 
 export const BlogShell: React.FC = ({ children }) => {
-  const [flag, setFlag] = useBoolean();
+  const [, setFlag] = useBoolean();
 
   const router = useRouter();
 

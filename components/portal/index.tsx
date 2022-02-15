@@ -1,5 +1,4 @@
 import {
-  Box,
   BoxProps,
   Button,
   Center,
@@ -9,19 +8,21 @@ import {
   Icon,
   Image,
   ImageProps,
+  ListItem,
+  OrderedList,
   Stack,
   Text,
+  UnorderedList,
   useClipboard,
 } from "@chakra-ui/react";
 import { NextLink } from "components/shared/NextLink";
-// import Youtube from "mdx-embed";
+import type { MDXComponents as MDXComponentsType } from "mdx/types";
 import Head from "next/head";
 import React from "react";
 import { onlyText } from "react-children-utilities";
 import { FiLink } from "react-icons/fi";
 import { IoCopy } from "react-icons/io5";
 import slugify from "slugify";
-import { MdxNavigation, MdxNavigationItem } from "./mdx-nav";
 
 interface HeadingLinkProps extends HeadingProps {}
 
@@ -85,10 +86,10 @@ const MdxP: React.FC = ({ children }) => (
 );
 
 interface MdxAProps {
-  href: string;
+  href?: string;
 }
 
-const MdxA: React.FC<MdxAProps> = ({ children, href }) => {
+const MdxA: React.FC<MdxAProps> = ({ children, href = "" }) => {
   const isExternal = href.startsWith("http");
   return (
     <NextLink color="primary.500" isExternal={!!isExternal} href={href}>
@@ -133,19 +134,16 @@ export const CodeWithCopy: React.FC = ({ children }) => {
   );
 };
 
-export const MdxComponents = {
-  a: MdxA,
-  h1: MdxH1,
-  h2: MdxH2,
-  h3: MdxH3,
-  p: MdxP,
-  code: CodeWithCopy,
-  ul: (props: BoxProps) => <Box as="ul" pt={2} pl={4} ml={2} {...props} />,
-  ol: (props: BoxProps) => <Box as="ol" pt={2} pl={4} ml={2} {...props} />,
-  li: (props: BoxProps) => (
-    <Box as="li" lineHeight="160%" py={2.5} {...props} />
-  ),
-  br: (props: BoxProps) => <Box height="24px" {...props} />,
+export const MdxComponents: MDXComponentsType = {
+  a: (props) => <MdxA href={props.href} />,
+  h1: (props) => <MdxH1 {...props} />,
+  h2: (props) => <MdxH2 {...props} />,
+  h3: (props) => <MdxH3 {...props} />,
+  p: (props) => <MdxP {...props} />,
+  code: (props) => <CodeWithCopy {...props} />,
+  ul: (props) => <UnorderedList pt={2} pl={4} ml={2} {...props} />,
+  ol: (props) => <OrderedList pt={2} pl={4} ml={2} {...props} />,
+  li: (props) => <ListItem lineHeight="160%" py={2.5} {...props} />,
   hr: () => <Divider my={4} w="100%" />,
   img: (props: ImageProps) => {
     return (
@@ -170,8 +168,5 @@ export const MdxComponents = {
     );
   },
   Head,
-  ImageSideToSide,
-  MdxNavigation,
-  MdxNavigationItem,
   // Youtube,
 };
