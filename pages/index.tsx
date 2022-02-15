@@ -1,5 +1,4 @@
 import { Stack } from "@chakra-ui/react";
-import { BlogLayout } from "components/app-layouts/blog";
 import { FeaturedBlog } from "components/portal/FeaturedBlog";
 import { GuidesList } from "components/portal/guides-list";
 import { useTrack } from "hooks/analytics/useTrack";
@@ -31,7 +30,7 @@ const Blog: ConsolePage<GuidesPageProps> = ({ guides: blogs }) => {
 };
 
 export async function getStaticProps() {
-  const guides = await getAllBlogs();
+  const guides = getAllBlogs();
 
   return {
     props: { guides },
@@ -39,5 +38,3 @@ export async function getStaticProps() {
 }
 
 export default Blog;
-
-Blog.Layout = BlogLayout;
