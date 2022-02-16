@@ -147,7 +147,7 @@ export const MdxComponents = {
   hr: () => <Divider my={4} w="100%" />,
   img: (props: ImageProps) => {
     return (
-      <Center my={3} p={2} borderRadius="md" border="1px solid rgba(0,0,0,0.1)">
+      <Center my={3} borderRadius="md">
         <Stack w="100%" align="center">
           <Image
             {...props}
@@ -155,7 +155,6 @@ export const MdxComponents = {
             h="100%"
             w="100%"
             objectFit="contain"
-            maxH="450px"
           />
 
           {props.alt && (
