@@ -16,7 +16,6 @@ import {
   useClipboard,
 } from "@chakra-ui/react";
 import { NextLink } from "components/shared/NextLink";
-import type { MDXComponents as MDXComponentsType } from "mdx/types";
 import Head from "next/head";
 import React from "react";
 import { onlyText } from "react-children-utilities";
@@ -134,20 +133,20 @@ export const CodeWithCopy: React.FC = ({ children }) => {
   );
 };
 
-export const MdxComponents: MDXComponentsType = {
-  a: (props) => <MdxA href={props.href} />,
-  h1: (props) => <MdxH1 {...props} />,
-  h2: (props) => <MdxH2 {...props} />,
-  h3: (props) => <MdxH3 {...props} />,
-  p: (props) => <MdxP {...props} />,
-  code: (props) => <CodeWithCopy {...props} />,
-  ul: (props) => <UnorderedList pt={2} pl={4} ml={2} {...props} />,
-  ol: (props) => <OrderedList pt={2} pl={4} ml={2} {...props} />,
-  li: (props) => <ListItem lineHeight="160%" py={2.5} {...props} />,
+export const MdxComponents = {
+  a: MdxA,
+  h1: MdxH1,
+  h2: MdxH2,
+  h3: MdxH3,
+  p: MdxP,
+  code: CodeWithCopy,
+  ul: (props: any) => <UnorderedList pt={2} pl={4} ml={2} {...props} />,
+  ol: (props: any) => <OrderedList pt={2} pl={4} ml={2} {...props} />,
+  li: (props: any) => <ListItem lineHeight="160%" py={2.5} {...props} />,
   hr: () => <Divider my={4} w="100%" />,
   img: (props: ImageProps) => {
     return (
-      <Center my={3} p={2} borderRadius="md" border="1px solid rgba(0,0,0,0.1)">
+      <Center my={3} borderRadius="md">
         <Stack w="100%" align="center">
           <Image
             {...props}
@@ -155,7 +154,6 @@ export const MdxComponents: MDXComponentsType = {
             h="100%"
             w="100%"
             objectFit="contain"
-            maxH="450px"
           />
 
           {props.alt && (
@@ -168,5 +166,4 @@ export const MdxComponents: MDXComponentsType = {
     );
   },
   Head,
-  // Youtube,
 };
