@@ -1,4 +1,5 @@
 import {
+  Box,
   BoxProps,
   Button,
   Center,
@@ -8,11 +9,8 @@ import {
   Icon,
   Image,
   ImageProps,
-  ListItem,
-  OrderedList,
   Stack,
   Text,
-  UnorderedList,
   useClipboard,
 } from "@chakra-ui/react";
 import { NextLink } from "components/shared/NextLink";
@@ -85,10 +83,10 @@ const MdxP: React.FC = ({ children }) => (
 );
 
 interface MdxAProps {
-  href?: string;
+  href: string;
 }
 
-const MdxA: React.FC<MdxAProps> = ({ children, href = "" }) => {
+const MdxA: React.FC<MdxAProps> = ({ children, href }) => {
   const isExternal = href.startsWith("http");
   return (
     <NextLink color="primary.500" isExternal={!!isExternal} href={href}>
@@ -140,13 +138,16 @@ export const MdxComponents = {
   h3: MdxH3,
   p: MdxP,
   code: CodeWithCopy,
-  ul: (props: any) => <UnorderedList pt={2} pl={4} ml={2} {...props} />,
-  ol: (props: any) => <OrderedList pt={2} pl={4} ml={2} {...props} />,
-  li: (props: any) => <ListItem lineHeight="160%" py={2.5} {...props} />,
+  ul: (props: BoxProps) => <Box as="ul" pt={2} pl={4} ml={2} {...props} />,
+  ol: (props: BoxProps) => <Box as="ol" pt={2} pl={4} ml={2} {...props} />,
+  li: (props: BoxProps) => (
+    <Box as="li" lineHeight="160%" py={2.5} {...props} />
+  ),
+  br: (props: BoxProps) => <Box height="24px" {...props} />,
   hr: () => <Divider my={4} w="100%" />,
   img: (props: ImageProps) => {
     return (
-      <Center my={3} borderRadius="md">
+      <Center my={3} p={2} borderRadius="md" border="1px solid rgba(0,0,0,0.1)">
         <Stack w="100%" align="center">
           <Image
             {...props}
@@ -154,6 +155,7 @@ export const MdxComponents = {
             h="100%"
             w="100%"
             objectFit="contain"
+            maxH="450px"
           />
 
           {props.alt && (
@@ -166,4 +168,5 @@ export const MdxComponents = {
     );
   },
   Head,
+  ImageSideToSide,
 };
