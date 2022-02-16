@@ -34,18 +34,18 @@ We’ve reworked our UI, polished our user flows, and made it more performant.
 
 Give it a try at [https://nightly.thirdweb.com/dashboard](https://nightly.thirdweb.com/dashboard) (testnet only for now)
 
-![](/assets/blog/thirdweb-v2/dashboard.png)
+![Dashboard UI](/assets/blog/thirdweb-v2/dashboard.png)
 
 
 ## Brand New Contract Architecture
 
-We’ve rethought our contract architecture from the ground up. The new architecture enables massive gas savings when deploying new contracts, with each contract 100% owned by you. 
+We’ve rethought our contract architecture from the ground up. The new architecture enables massive gas savings when deploying new contracts, with each contract still 100% owned by you. 
 
-**The new thirdweb is now 10x cheaper to deploy new contracts.**
+By leveraging proxy contracts and removing the project deployment requirement, **thirdweb is now up 10x cheaper to deploy new contracts**.
 
 Stay tuned for an in-depth article from our contract engineering team on this new architecture.
 
-![](/assets/blog/thirdweb-v2/contract-architecture.png)
+![Contract Architecture](/assets/blog/thirdweb-v2/contract-architecture.png)
 
 
 ## Brand New Typescript SDK
@@ -58,7 +58,7 @@ You can play with it right now by installing the latest version:
 npm intall @3rdweb/sdk@nightly
 ```
 
-Deploying, configuring, and interacting with your smart contracts from your own code just got easier.
+Deploying, configuring, and interacting with your smart contracts from your own code is now more consistent and predictable across the entire SDK.
 
 ```javascript
 import { ThirdwebSDK } from "@3rdweb/sdk";
@@ -73,7 +73,7 @@ const marketplace = sdk.getMarketplace("0x...");
 const listings = await marketplace.getAllListings();
 
 // Perform transactions (requires a signer)
-await marketplace.buyoutDirectListing(listingId, quantityDesired);
+await nftDrop.claim(quantity);
 ```
 
 Check out the new code snippets from the Dashboard directly to get familiar with the new APIs. Each deployed contract has a "Code" tab to show you how to interact with it from code.
