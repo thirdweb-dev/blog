@@ -1,0 +1,85 @@
+---
+title: Introducing thirdweb v2
+draft: false
+author: "thirdweb"
+authorAvatar: "https://pbs.twimg.com/profile_images/1455238767321784325/Xi_Xwzwg_400x400.jpg"
+authorTwitter: "https://twitter.com/thirdweb_"
+tags: [announcement]
+summary: "Announcing a major upgrade to the thirdweb platform"
+image: "/assets/blog/thirdweb-v2/banner.png"
+date: "2022-02-15"
+updated: ""
+---
+
+We're excited to announce a major upgrade to the thirdweb platform! We've been hard at work to improve the thirdweb experience on all fronts: dashboard, contracts, and SDK. 
+
+## TLDR
+
+- Revamped Dashboard → Better UX
+- New Contracts architecture → 10x gas savings!
+- Refreshed SDKs → Better DX
+
+
+## How to try it out
+
+- Try out the new dashboard: [https://nightly.thirdweb.com/dashboard](https://nightly.thirdweb.com/dashboard)
+- Install the latest SDK: `npm install @3rdweb/sdk@nightly`
+
+
+## Revamped Dashboard
+
+We've simplified the thirdweb dashboard by removing Projects, and renaming Modules to Contracts. You can now deploy contracts directly from your wallet, saving you time and gas.
+
+We've reworked our UI, polished our user flows, and made it more performant.
+
+Give it a try at [https://nightly.thirdweb.com/dashboard](https://nightly.thirdweb.com/dashboard) (testnet only for now)
+
+![New Dashboard UI](/assets/blog/thirdweb-v2/dashboard.png)
+
+
+## Brand New Contract Architecture
+
+We've rethought our contract architecture from the ground up. The new architecture enables massive gas savings when deploying new contracts, with each contract still 100% owned by you. 
+
+By leveraging proxy contracts and removing the project deployment requirement, **thirdweb is now up 10x cheaper to deploy new contracts**.
+
+Stay tuned for an in-depth article from our contract engineering team on this new architecture.
+
+![New Contract Architecture](/assets/blog/thirdweb-v2/contract-architecture.png)
+
+
+## Brand New Typescript SDK
+
+Our popular Typescript SDK just got even better! We've given it a fresh coat of paint, improved the developer experience, and added quality of life API changes.
+
+You can play with it right now by installing the latest version:
+
+```bash
+npm intall @3rdweb/sdk@nightly
+```
+
+Deploying, configuring, and interacting with your smart contracts from your own code is now more consistent and predictable across the entire SDK.
+
+```javascript
+import { ThirdwebSDK } from "@3rdweb/sdk";
+
+const sdk = new ThirdwebSDK("your_rpc_url_or_signer");
+
+// access your deployed contracts
+const nftDrop = sdk.getNFTDrop("0x...");
+const marketplace = sdk.getMarketplace("0x...");
+
+// Read from your contract
+const listings = await marketplace.getAllListings();
+
+// Perform transactions (requires a signer)
+await nftDrop.claim(quantity);
+```
+
+Check out the new code snippets from the Dashboard directly to get familiar with the new APIs. Each deployed contract has a "Code" tab to show you how to interact with it from code.
+
+Expect new articles, guides and code snippets in the coming days to cover everything that's changed, as well as improved Python and Go SDKs. In the meantime check out the latest releases on [Github](https://github.com/nftlabs/nftlabs-sdk-ts/tree/v2).
+
+## We're just getting started!
+
+There's much more to come on dashboard, contracts, and SDK. Your feedback is precious to us, join us on [Discord](http://discord.gg/thirdweb) and tell us what you think!
