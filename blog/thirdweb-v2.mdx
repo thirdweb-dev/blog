@@ -8,7 +8,7 @@ tags: [announcement]
 summary: "Announcing a major upgrade to the thirdweb platform"
 image: "/assets/blog/thirdweb-v2/banner.png"
 date: "2022-02-15"
-updated: "2022-03-09"
+updated: "2022-03-14"
 ---
 
 We're excited to announce a major upgrade to the thirdweb platform! We've been hard at work to improve the thirdweb experience on all fronts: dashboard, contracts, and SDK. 
@@ -18,13 +18,12 @@ We're excited to announce a major upgrade to the thirdweb platform! We've been h
 - Revamped Dashboard → Better UX
 - New Contracts architecture → up to 10x gas savings!
 - Refreshed SDKs → Better DX
-
+- We're not taking any fees for all 2022.
 
 ## How to try it out
 
 - Try out the new dashboard: [https://nightly.thirdweb.com/dashboard](https://nightly.thirdweb.com/dashboard)
-- Install the latest SDK: `npm install @thirdweb-dev/sdk@nightly`
-
+- Install the latest SDK: `npm install @thirdweb-dev/sdk`
 
 ## Revamped Dashboard
 
@@ -36,7 +35,6 @@ Give it a try at [https://nightly.thirdweb.com/dashboard](https://nightly.thirdw
 
 ![New Dashboard UI](/assets/blog/thirdweb-v2/dashboard.png)
 
-
 ## Brand New Contract Architecture
 
 We've rethought our contract architecture from the ground up. The new architecture enables massive gas savings when deploying new contracts, with each contract still 100% owned by you. 
@@ -46,7 +44,6 @@ By leveraging proxy contracts and removing the project deployment requirement, *
 Stay tuned for an in-depth article from our contract engineering team on this new architecture.
 
 ![New Contract Architecture](/assets/blog/thirdweb-v2/contract-architecture.png)
-
 
 ## Brand New Typescript SDK
 
@@ -82,6 +79,14 @@ Check out [what's new Typescript SDK](https://thirdweb.notion.site/What-s-new-in
 
 Expect new articles, guides and code snippets in the coming days to cover everything that's changed, as well as improved Python and Go SDKs. In the meantime check out the latest releases on [Github](https://github.com/thirdweb-dev/typescript-sdk/tree/v2).
 
+## No fees in 2022
+
+Before, we took 5% of whatever royalties you took. For v2, we decided to scrape that and not take anything. Why are we going free?
+
+- Royalties are off-chain so it didn't make sense for us on how to want to positionate ourselves
+- We want our base capabilites to always be free. 
+- We'll be adding "Bring your own contract" functionality soon in which our current fee model doesn't align.
+- We'll charge for some features in the future but we'll always be clear before we start charging, in addition, any contract deployed while we're in this no fees phase **will always be free**, and we'll only start taking fees for contracts deployed after we enable fees.
 ## We're just getting started!
 
 There's much more to come on dashboard, contracts, and SDK. Your feedback is precious to us, join us on [Discord](http://discord.gg/thirdweb) and tell us what you think!
