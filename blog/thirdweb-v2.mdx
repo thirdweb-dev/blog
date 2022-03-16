@@ -15,14 +15,13 @@ We're excited to announce a major upgrade to the thirdweb platform! We've been h
 
 ## TLDR
 
-- Revamped Dashboard → Better UX
 - New Contracts architecture → up to 10x gas savings!
+- Revamped Dashboard → Better UX
 - Refreshed SDKs → Better DX
-- We're not taking any fees for all 2022.
 
 ## How to try it out
 
-- Try out the new dashboard: [https://nightly.thirdweb.com/dashboard](https://nightly.thirdweb.com/dashboard)
+- Try out the new dashboard: [https://thirdweb.com/dashboard](https://thirdweb.com/dashboard)
 - Install the latest SDK: `npm install @thirdweb-dev/sdk`
 
 ## Revamped Dashboard
@@ -31,7 +30,7 @@ We've simplified the thirdweb dashboard by removing Projects, and renaming Modul
 
 We've reworked our UI, polished our user flows, and made it more performant.
 
-Give it a try at [https://nightly.thirdweb.com/dashboard](https://nightly.thirdweb.com/dashboard) (testnet only for now)
+Give it a try at [https://thirdweb.com/dashboard](https://thirdweb.com/dashboard)
 
 ![New Dashboard UI](/assets/blog/thirdweb-v2/dashboard.png)
 
@@ -39,7 +38,11 @@ Give it a try at [https://nightly.thirdweb.com/dashboard](https://nightly.thirdw
 
 We've rethought our contract architecture from the ground up. The new architecture enables massive gas savings when deploying new contracts, with each contract still 100% owned by you. 
 
+![Lower gas fees](/assets/blog/thirdweb-v2/lower-gas-fees.png)
+
 By leveraging proxy contracts and removing the project deployment requirement, **thirdweb is now up 10x cheaper to deploy new contracts**.
+
+This is a huge step towards lowering the barrier to entry for web3 developers even further.
 
 Stay tuned for an in-depth article from our contract engineering team on this new architecture.
 
@@ -52,7 +55,7 @@ Our popular Typescript SDK just got even better! We've given it a fresh coat of 
 You can play with it right now by installing the latest version:
 
 ```bash
-npm install @thirdweb-dev/sdk@nightly
+npm install @thirdweb-dev/sdk
 ```
 
 Deploying, configuring, and interacting with your smart contracts from your own code is now more consistent and predictable across the entire SDK.
@@ -77,16 +80,8 @@ Check out the new code snippets from the Dashboard directly to get familiar with
 
 Check out [what's new Typescript SDK](https://thirdweb.notion.site/What-s-new-in-thirdweb-SDK-13e22ad0976f49569ab2475e547a0919).
 
-Expect new articles, guides and code snippets in the coming days to cover everything that's changed, as well as improved Python and Go SDKs. In the meantime check out the latest releases on [Github](https://github.com/thirdweb-dev/typescript-sdk/tree/v2).
+Expect new articles, guides and code snippets in the coming days to cover everything that's changed, as well as improved Python and Go SDKs. In the meantime check out the latest releases on [GitHub](https://github.com/thirdweb-dev/typescript-sdk).
 
-## No fees in 2022
-
-Before, we took 5% of whatever royalties you took. For v2, we decided to scrape that and not take anything. Why are we going free?
-
-- Royalties are off-chain so it didn't make sense for us on how to want to positionate ourselves
-- We want our base capabilites to always be free. 
-- We'll be adding "Bring your own contract" functionality soon in which our current fee model doesn't align.
-- We'll charge for some features in the future but we'll always be clear before we start charging, in addition, any contract deployed while we're in this no fees phase **will always be free**, and we'll only start taking fees for contracts deployed after we enable fees.
 ## We're just getting started!
 
 There's much more to come on dashboard, contracts, and SDK. Your feedback is precious to us, join us on [Discord](http://discord.gg/thirdweb) and tell us what you think!
