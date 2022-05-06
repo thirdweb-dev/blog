@@ -3,8 +3,8 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://thirdweb.com
+Host: https://blog.thirdweb.com
 
 # Sitemaps
-Sitemap: https://thirdweb.com/sitemap.xml
-Sitemap: https://thirdweb.com/sitemap-0.xml
+Sitemap: https://blog.thirdweb.com/sitemap.xml
+Sitemap: https://blog.thirdweb.com/sitemap-0.xml

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://thirdweb.com</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-02-15T23:23:11.350Z</lastmod></url>
-<url><loc>https://thirdweb.com/hello-world</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-02-15T23:23:11.351Z</lastmod></url>
-<url><loc>https://thirdweb.com/tag/react</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-02-15T23:23:11.351Z</lastmod></url>
-<url><loc>https://thirdweb.com/tag/marketplace</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-02-15T23:23:11.351Z</lastmod></url>
-<url><loc>https://thirdweb.com/tag/auction</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-02-15T23:23:11.351Z</lastmod></url>
-<url><loc>https://thirdweb.com/tag/front-end</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-02-15T23:23:11.351Z</lastmod></url>
+<url><loc>https://blog.thirdweb.com</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-05-06T23:51:32.008Z</lastmod></url>
+<url><loc>https://blog.thirdweb.com/tag/announcement</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-05-06T23:51:32.008Z</lastmod></url>
+<url><loc>https://blog.thirdweb.com/tag/pricing</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-05-06T23:51:32.008Z</lastmod></url>
+<url><loc>https://blog.thirdweb.com/tag/nft-drop</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-05-06T23:51:32.008Z</lastmod></url>
+<url><loc>https://blog.thirdweb.com/tag/feature-release</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-05-06T23:51:32.008Z</lastmod></url>
+<url><loc>https://blog.thirdweb.com/delayed-reveal-nfts</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-05-06T23:51:32.008Z</lastmod></url>
+<url><loc>https://blog.thirdweb.com/thirdweb-deploy</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-05-06T23:51:32.008Z</lastmod></url>
+<url><loc>https://blog.thirdweb.com/thirdweb-is-now-free</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-05-06T23:51:32.008Z</lastmod></url>
+<url><loc>https://blog.thirdweb.com/thirdweb-v2</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-05-06T23:51:32.008Z</lastmod></url>
 </urlset>
