@@ -10,7 +10,12 @@ import {
   Image,
   ImageProps,
   Stack,
+  Table,
+  Td,
   Text,
+  Th,
+  Thead,
+  Tr,
   useClipboard,
 } from "@chakra-ui/react";
 import { NextLink } from "components/shared/NextLink";
@@ -55,7 +60,7 @@ const MdxH1: React.FC = ({ children }) => (
 
 const MdxH2: React.FC = ({ children }) => {
   return (
-    <MdxHeadingLink size="title.lg" as="h2" my={6} lineHeight="120%">
+    <MdxHeadingLink size="title.lg" as="h2" mt={8} lineHeight="120%">
       {children}
     </MdxHeadingLink>
   );
@@ -63,7 +68,7 @@ const MdxH2: React.FC = ({ children }) => {
 
 const MdxH3: React.FC = ({ children }) => {
   return (
-    <MdxHeadingLink size="title.sm" as="h3" my={2} lineHeight="120%">
+    <MdxHeadingLink size="title.sm" as="h3" mt={8} lineHeight="120%">
       {children}
     </MdxHeadingLink>
   );
@@ -75,7 +80,7 @@ const MdxP: React.FC = ({ children }) => (
     overflowX="auto"
     size="body.lg"
     as="p"
-    my={3}
+    mt={3}
     lineHeight="160%"
   >
     {children}
@@ -138,13 +143,20 @@ export const MdxComponents = {
   h3: MdxH3,
   p: MdxP,
   code: CodeWithCopy,
-  ul: (props: BoxProps) => <Box as="ul" pt={2} pl={4} ml={2} {...props} />,
+  ul: (props: BoxProps) => (
+    <Box as="ul" pt={2} pl={4} ml={2} mb={4} {...props} />
+  ),
   ol: (props: BoxProps) => <Box as="ol" pt={2} pl={4} ml={2} {...props} />,
   li: (props: BoxProps) => (
-    <Box as="li" lineHeight="160%" py={2.5} {...props} />
+    <Box as="li" lineHeight="100%" py={2} nb {...props} />
   ),
   br: (props: BoxProps) => <Box height="24px" {...props} />,
   hr: () => <Divider my={4} w="100%" />,
+  table: (props: any) => <Table {...props} />,
+  thead: (props: any) => <Thead {...props} />,
+  tr: (props: any) => <Tr {...props} />,
+  th: (props: any) => <Th {...props} />,
+  td: (props: any) => <Td {...props} />,
   img: (props: ImageProps) => {
     return (
       <Center my={3} borderRadius="md">
