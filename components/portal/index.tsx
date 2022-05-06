@@ -143,18 +143,20 @@ export const MdxComponents = {
   h3: MdxH3,
   p: MdxP,
   code: CodeWithCopy,
-  ul: (props: BoxProps) => <Box as="ul" pt={2} pl={4} ml={2} mb={4} {...props} />,
+  ul: (props: BoxProps) => (
+    <Box as="ul" pt={2} pl={4} ml={2} mb={4} {...props} />
+  ),
   ol: (props: BoxProps) => <Box as="ol" pt={2} pl={4} ml={2} {...props} />,
   li: (props: BoxProps) => (
     <Box as="li" lineHeight="100%" py={2} nb {...props} />
   ),
   br: (props: BoxProps) => <Box height="24px" {...props} />,
   hr: () => <Divider my={4} w="100%" />,
-  table: (props: any) => <Table  {...props}/>,
-  thead: (props: any) => <Thead {...props}/>,
-  tr: (props: any) => <Tr {...props}/>,
-  th: (props: any) => <Th {...props}/>,
-  td: (props: any) => <Td {...props}/>,
+  table: (props: any) => <Table {...props} />,
+  thead: (props: any) => <Thead {...props} />,
+  tr: (props: any) => <Tr {...props} />,
+  th: (props: any) => <Th {...props} />,
+  td: (props: any) => <Td {...props} />,
   img: (props: ImageProps) => {
     return (
       <Center my={3} borderRadius="md">
