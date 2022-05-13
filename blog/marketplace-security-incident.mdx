@@ -1,0 +1,35 @@
+---
+title: "🔔 Smart Contract Incident Notification (Low)"
+author: "Krishang"
+authorAvatar: "/assets/authors/krishang.png"
+authorTwitter: "https://twitter.com/MonkeyMeaning"
+draft: false
+tags: [security, low-severity]
+summary: "Marketplace bug: cannot make native token bids to auctions."
+image: "/assets/blog/delayed-reveal-nfts/thumbnail.jpeg"
+date: "2022-05-13"
+updated: ""
+---
+
+We’ve identified and fixed an issue causing transactions to revert when making offers / bids using native tokens in our **Marketplace** contract on May 10 2022. If you deployed a marketplace contract between *Apr-19-2022 06:19:19 PM UTC* and *May-10-2022 08:19:32*, your contracts are affected.
+
+**NFTs & funds are safe.**
+
+### What happened?
+
+On Apr 19 2022, the `Marketplace` contract was deployed on a few chains with the incorrect address for the chain’s native token wrapper (e.g. the WETH contract address on Ethereum mainnet). As a result, the contract cannot accept bids in native tokens (ETH on Ethereum, MATIC on Polygon, etc).
+
+On May 10 2022, we redeployed the fix to all thirdweb supported chains with the respective chain’s correct native token wrapper contract address.
+
+For the affected contracts that are deployed between *Apr 19 2022* and *May 10 2022* on Ethereum, Polygon, Fantom, Avalanche:
+
+- No one can bid to auctions that accept native tokens. However, it is still possible to bid through ERC20 tokens including wrapped token (WETH, WMATIC, WFTM, WAVAX).
+- Some *smart contracts* (NOT regular wallet users e.g. Metamask, Coinbase Wallet, Rainbow Wallet) cannot sell assets priced in native tokens from direct listings.
+
+To ensure the mentioned incident doesn’t occur again, we have compiled and verified the list of native token wrapper contracts for all chains that thirdweb supports. This list is available in our [open-sourced smart contracts repository](https://github.com/thirdweb-dev/contracts/blob/main/utils/nativeTokenWrapper.ts). We have also established a better contract deployment process internally. Not only that, we’re also building out a better tooling to prevent mistakes like this from happening again. ([thirdweb deploy](https://blog.thirdweb.com/thirdweb-deploy))
+
+### What’s next?
+
+If your contract is affected on mainnet, you should see the deployment gas cost refunded to your wallet. To make it easier to verify, we have put together a list of affected `Marketplace` contracts and the deployer’s wallet address. ([https://ipfs.io/ipfs/QmNrzvj7hMbcDhye2REjWtRY7DtvSGJsifqFfYA2upqqfk](https://ipfs.io/ipfs/QmNrzvj7hMbcDhye2REjWtRY7DtvSGJsifqFfYA2upqqfk))
+
+We recommend that you re-deploy a new `Marketplace` contract through our dashboard or latest version of our SDK.
