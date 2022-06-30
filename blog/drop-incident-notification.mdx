@@ -1,0 +1,79 @@
+---
+title: "Drop Incident Notification"
+author: "Krishang"
+authorAvatar: "/assets/authors/krishang.png"
+authorTwitter: "https://twitter.com/MonkeyMeaning"
+draft: false
+tags: [security, low-severity]
+summary: "Drop bug: claimers can bypass claim quantity limit per transaction when there is no allowlist."
+image: "/assets/blog/marketplace-incident-notification/thumbnail.jpeg"
+date: "2022-06-30"
+updated: ""
+---
+
+On Jun 18 2022, we received a report of the issue and promptly fixed it on the same day. We’ve confirmed the fix with the reporter and our security audit partner. In addition, we’re also working with our auditing partner to understand why the audit missed the bug to make sure this doesn’t happen again.
+
+**NFTs and funds are safe.**
+
+### What happened?
+
+On Apr-20-2022, we introduced a change in our Drop contracts (NFT Drop, Edition Drop, Token Drop) to enable per address claim limit per transaction in an allowlist. Unfortunately, we missed a check condition, which lets an actor bypass the claim limit per transaction in claim phases, when there is no allow list.
+
+For Drop contracts deployed between Apr-20-2022 and Jun-18-2022:
+- Claimers can claim more than the **claim limit per transaction** when no allow list is set in the claim phases. However, they would still have to **pay the correct total price for the tokens claimed**.
+
+The issue only affects the claim limit per transaction. It does not impact other claim mechanisms:
+- Claimers cannot claim more than the minted amount (the total supply).
+- Claimers **cannot** claim if the claim phase is not active.
+
+### Root cause
+
+In the last audit of Drop contracts introduced a fix regarding general and specific claim limits. To give precedence to specific claim limits in the allowlist, a check was introduced for `_proofMaxQuantityPerTransaction` parameter passed to the claim function. When `_proofMaxQuantityPerTransaction` is zero, the claim will rely on general limit
+
+```solidity
+bool toVerifyMaxQuantityPerTransaction = _proofMaxQuantityPerTransaction == 0
+```
+
+However, the check was incomplete; it didn’t check if the allowlist was present or not. It led to a caller passing any non-zero value for `_proofMaxQuantityPerTransaction` and bypass checks for both general and specific limits
+
+### Fix
+
+Extended the check as follows:
+
+```solidity
+bool toVerifyMaxQuantityPerTransaction = 
+				_proofMaxQuantityPerTransaction == 0 || 
+				claimCondition.merkleRoot == bytes32(0);
+```
+
+this now ensures that claim relies on general limit in both situations mentioned below:
+
+- when there’s no allowlist present
+- when an allowlist is present but max quantity for that allowlist is not specified (or 0)
+
+if a caller passes arbitrary value for `_proofMaxQuantityPerTransaction` :
+
+- when an allowlist is present, the function `verifyClaimMerkleProof` will fail to verify for the wrong value
+- when an allowlist is not present, the function `verifyClaim` will check that quantity being claimed is within the general limit
+
+### Contract deployments
+
+Registering implementations: [https://etherscan.io/tx/0xb07a35a22931939efb173ef1e191b9c06ae8bcdeab83aad508e7bf77fd98bf21](https://etherscan.io/tx/0xb07a35a22931939efb173ef1e191b9c06ae8bcdeab83aad508e7bf77fd98bf21)
+
+DropERC721 (NFT Drop) [https://etherscan.io/tx/0xd2d5b35fcf82e79059ab844db6e576bbef1809b7fa8213b6c4e4547bae3f74df](https://etherscan.io/tx/0xd2d5b35fcf82e79059ab844db6e576bbef1809b7fa8213b6c4e4547bae3f74df)
+
+DropERC20 (Token Drop) [https://etherscan.io/tx/0x7b0f33158055d75290362e1be737ed60acfe8e2c72ae9d617b9e25f35502bc2a](https://etherscan.io/tx/0x7b0f33158055d75290362e1be737ed60acfe8e2c72ae9d617b9e25f35502bc2a)
+
+DropERC1155 (Edition Drop) [https://etherscan.io/tx/0x40aa4558137988a546d9c5696f9f1d19ccc7bb28d5fefb691a881f7cd6258a67](https://etherscan.io/tx/0x40aa4558137988a546d9c5696f9f1d19ccc7bb28d5fefb691a881f7cd6258a67)
+
+other chains deployment can be found through blockscan under the same wallet address.
+
+### What’s next?
+
+If your drop is still active, and you intend to use a claim quantity limit per transaction without an allowlist for claiming, we recommend you find an alternative claim mechanic. If you would like to keep the same claim mechanic, contact us as we’d be able to help you with alternatives.
+
+If your drop is no longer publicly claimable or does not have a claim phase, you don’t have to take any actions.
+
+For support, feel free to reach out in our public discord or email support@thirdweb.com. 
+
+For security reports, please send them to security@thirdweb.com.
